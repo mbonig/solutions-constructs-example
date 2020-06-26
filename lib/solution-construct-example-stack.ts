@@ -51,19 +51,9 @@ export class SolutionConstructExampleStack extends Stack {
 
 
 
-        const lambdaToDynamo = new LambdaToDynamoDB(this, 'businesslogic', {
+        new LambdaToDynamoDB(this, 'businesslogic', {
             deployLambda: false,
             existingLambdaObj: apig2lambda.lambdaFunction,
-            dynamoTableProps: {
-                partitionKey: {
-                    name: 'pk',
-                    type: AttributeType.STRING
-                },
-                sortKey: {
-                    name: 'sk',
-                    type: AttributeType.STRING
-                }
-            },
             existingTableObj: ddbAndStream.dynamoTable
         });
 
