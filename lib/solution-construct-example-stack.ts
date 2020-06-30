@@ -1,10 +1,10 @@
-import {ApiGatewayToLambda} from '@aws-solutions-constructs/aws-apigateway-lambda';
 import {Construct, Stack, StackProps} from "@aws-cdk/core";
-import {Code, Runtime} from "@aws-cdk/aws-lambda";
-import {LambdaToDynamoDB} from '@aws-solutions-constructs/aws-lambda-dynamodb';
-import {AttributeType, BillingMode} from "@aws-cdk/aws-dynamodb";
-import {DynamoDBStreamToLambda} from '@aws-solutions-constructs/aws-dynamodb-stream-lambda';
 import {AuthorizationType} from "@aws-cdk/aws-apigateway";
+import {Code, Runtime} from "@aws-cdk/aws-lambda";
+import {AttributeType, BillingMode} from "@aws-cdk/aws-dynamodb";
+import {ApiGatewayToLambda} from '@aws-solutions-constructs/aws-apigateway-lambda';
+import {LambdaToDynamoDB} from '@aws-solutions-constructs/aws-lambda-dynamodb';
+import {DynamoDBStreamToLambda} from '@aws-solutions-constructs/aws-dynamodb-stream-lambda';
 
 export class SolutionConstructExampleStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -49,15 +49,10 @@ export class SolutionConstructExampleStack extends Stack {
             }
         });
 
-
-
         new LambdaToDynamoDB(this, 'businesslogic', {
             deployLambda: false,
             existingLambdaObj: apig2lambda.lambdaFunction,
             existingTableObj: ddbAndStream.dynamoTable
         });
-
-
-
     }
 }
